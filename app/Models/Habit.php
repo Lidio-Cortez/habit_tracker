@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 
-class habit extends Model
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Habit extends Model
 {
+      use HasFactory;
+
     protected $fillable = [
         'user_id',
         'name'

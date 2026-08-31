@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 use App\Models\User;
-use App\Models\habit;
+use App\Models\Habit;
 
 return new class extends Migration
 {
@@ -21,11 +21,13 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
             $table
-                ->foreignIdFor(habit::class)
+                ->foreignIdFor(Habit::class)
                 ->constrained()
                 ->cascadeOnDelete();
             $table->date('completed_at');
             $table->timestamps();
+
+            $table->unique('habit_id', 'completed_at');
         });
     }
 

@@ -30,7 +30,7 @@ class User extends Authenticatable
         ];
     }
     public function habits(): hasmany{
-        return $this->hasMany(habit::class);
+        return $this->hasMany(Habit::class);
     }
     public function habbitLogs(): hasMany{
         return $this->hasMany(HabitLog::class);
