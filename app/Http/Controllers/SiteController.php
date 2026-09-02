@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SiteController extends Controller
 {
-    public function index(){
-        $name = "Lidio";
-        $habbit = ['run', 'study', 'eat'];
-        return view('home',compact('name', 'habbit'));
+    public function index(): view{
+        return view('home');
     }
-    public function dashboard(){
-        return view('dashboard');
+    public function dashboard(): view{
+        $habits = auth()->user()->habits;
+        return view('dashboard', compact('habits'));
     }
 }
