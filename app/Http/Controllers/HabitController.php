@@ -12,9 +12,9 @@ class HabitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+     public function index(): view{
+        $habits = auth()->user()->habits;
+        return view('dashboard', compact('habits'));
     }
 
     /**

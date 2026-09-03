@@ -4,7 +4,7 @@
         <h1>
             Cadastrar novo Habito
         </h1>
-        <form action="{{ route('habit.store') }}" method="post" class="flex flex-col">
+        <form action="{{ route('habits.store') }}" method="post" class="flex flex-col">
             @csrf
             <div class="flex flex-col gap-2 mb-2">
                 <label for="name">Nome do Hábito</label>

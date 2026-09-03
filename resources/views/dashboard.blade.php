@@ -3,7 +3,7 @@
         <h1 class="font-bold text-4xl text-center">
             Dashboard
         </h1>
-        <a href="{{ route('habit.create'); }}" class="p-2 border-2 bg-white font-bold">
+        <a href="{{ route('habits.create'); }}" class="p-2 border-2 bg-white font-bold">
             Cadastrar habito
         </a>
         @session('success')
@@ -29,10 +29,10 @@
                         <p>
                             [{{ $habit->habbitLogs->count() }}]
                         </p>
-                        <a href="{{ route('habit.edit', $habit->id) }}" class="bg-white text-white p-1 border-2 hover:opacity-50">
+                        <a href="{{ route('habits.edit', $habit->id) }}" class="bg-white text-white p-1 border-2 hover:opacity-50">
                             <x-icons.edit />
                         </a>
-                        <form action="{{ route('habit.destroy',$habit->id) }}" method="post">
+                        <form action="{{ route('habits.destroy',$habit->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="bg-red-500 text-white p-1 border-2 hover:opacity-50 cursor-pointer" type="submit">
