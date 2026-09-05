@@ -1,7 +1,12 @@
 <header class="bg-white flex items-center justify-between p-4 border-b-2">
-    <a href="{{ route('habits.index') }}" class="habit-btn habit-shadow-lg px-2 py-1 bg-habit-orange">
-        HT
-    </a>
+    <div class="flex items-center gap-2">
+        <a href="{{ route('habits.index') }}" class="habit-btn habit-shadow-lg px-2 py-1 bg-habit-orange">
+            HT
+        </a>
+        <p>
+            Habit Tracker
+        </p>
+    </div>
     <div>
 
         @auth

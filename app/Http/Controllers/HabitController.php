@@ -86,4 +86,9 @@ class HabitController extends Controller
                 ->route('site.dashboard')
                 ->with('success', 'Hábito apagado com sucesso! ');  
     }
+    public function settings(): view
+    {
+        $habits = auth()->user()->habits;
+        return view('habit.settings', compact('habits'));
+    }
 }

@@ -10,7 +10,7 @@
         @endsession
         <p class="pt-6">
             <h2 class="text-lg mt-8 mb-4">
-                {{ date('d/m/Y') }}
+                Configurar Hábitos
             </h2>
             <ul class="flex flex-col gap-2 ">
                 @forelse ($habits as $habit)
@@ -21,7 +21,19 @@
                         <p class="font-bold text-lg">
                           - {{ $habit->name }}
                         </p>
-                        
+                        <span class="font-light text-md">
+                          ( {{ $habit->created_at->format('d/m/Y') }} )
+                        </span>
+                        <a href="{{ route('habits.edit', $habit->id) }}" class="bg-white text-white p-1 border-2 hover:opacity-50">
+                            <x-icons.edit />
+                        </a>
+                        <form action="{{ route('habits.destroy',$habit->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="bg-red-500 text-white p-1 border-2 hover:opacity-50 cursor-pointer" type="submit">
+                                <x-icons.trash  />
+                            </button>
+                        </form>
                     </div>
                 </li>
 
