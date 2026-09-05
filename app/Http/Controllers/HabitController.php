@@ -9,14 +9,18 @@ use App\Http\Requests\HabitRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\HabitLog;
-
+use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class HabitController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
      public function index(): view{
-        $habits = Auth::user()->habits;
+        $habits = Auth::user()->habits()
+                              ->with('habbitLogs')
+                              ->get();
+
         return view('dashboard', compact('habits'));
     }
 
@@ -55,6 +59,8 @@ class HabitController extends Controller
      */
     public function edit(Habit $habit): view
     {
+         $this->authorize('update', $habit);
+
         return view('habit.edit', compact('habit'));
     }
 
@@ -63,9 +69,7 @@ class HabitController extends Controller
      */
     public function update(HabitRequest $request, Habit $habit)
     {
-        if($habit->user_id !== auth()->id()){
-            abort(403, 'Não tens acesso para apagar este hábito');
-        }
+        $this->authorize('update', $habit);
 
         $habit->update($request->all());
 
@@ -79,9 +83,7 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        if($habit->user_id !== auth()->id()){
-            abort(403, 'Não tens acesso para apagar este hábito');
-        }
+       $this->authorize('delete', $habit);
 
         $habit->delete();
     
@@ -96,9 +98,7 @@ class HabitController extends Controller
     }
     public function toggle(Habit $habit)
     {
-        if($habit->user_id !== auth()->id()){
-            abort(403, 'Não tens acesso para alterar este hábito');
-        }
+       $this->authorize('toggle', $habit);
 
         $today = Carbon::today()->toDateString();
 
