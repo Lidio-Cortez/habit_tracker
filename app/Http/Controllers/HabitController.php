@@ -6,6 +6,9 @@ use App\Models\Habit;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\HabitRequest;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\HabitLog;
 
 class HabitController extends Controller
 {
@@ -13,7 +16,7 @@ class HabitController extends Controller
      * Display a listing of the resource.
      */
      public function index(): view{
-        $habits = auth()->user()->habits;
+        $habits = Auth::user()->habits;
         return view('dashboard', compact('habits'));
     }
 
@@ -32,7 +35,7 @@ class HabitController extends Controller
     {
         $validated = $request->validated();
 
-        auth()->user()->habits()->create($validated);
+        Auth::user()->habits()->create($validated);
 
         return redirect()
                 ->route('site.dashboard')
@@ -88,7 +91,35 @@ class HabitController extends Controller
     }
     public function settings(): view
     {
-        $habits = auth()->user()->habits;
+        $habits = Auth::user()->habits;
         return view('habit.settings', compact('habits'));
+    }
+    public function toggle(Habit $habit)
+    {
+        if($habit->user_id !== auth()->id()){
+            abort(403, 'Não tens acesso para alterar este hábito');
+        }
+
+        $today = Carbon::today()->toDateString();
+
+        $log = HabitLog::where('habit_id', $habit->id)
+                    ->whereDate('created_at', $today)
+                    ->first();
+
+        if ($log) {
+            $log->delete();
+            $message = 'Hábito desmarcado como concluído para hoje.';
+        } else {
+            HabitLog::create([
+                'user_id' => Auth::user()->id,
+                'habit_id' => $habit->id,
+                'completed_at' => $today,
+            ]);
+            $message = 'Hábito marcado como concluído para hoje.';
+        }
+
+        return redirect()
+                ->route('habits.index')
+                ->with('success', $message);  
     }
 }
