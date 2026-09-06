@@ -10,11 +10,11 @@
 
     {{-- YEAR SELECTION --}}
     <div class="my-4">
-      @foreach($habits as $y)
+      @foreach($avalidYears as $y)
         <a
           href="{{ route('habits.history', $y) }}"
           class="habit-btn habit-shadow-lg p-2 inline-block
-          {{ $habits == $y ? 'bg-habit-orange' : 'bg-white' }}"
+          {{ $selectedYear == $y ? 'bg-habit-orange' : 'bg-white' }}"
         >
           {{ $y }}
         </a>
