@@ -10,9 +10,11 @@
         <title>{{ config('app.name') }}</title>
         @vite('resources/css/app.css')
     </head>
-    <body class="p-5 bg-[#FFEDD6] min-h-[calc(100vh-100px)] flex flex-col justify-between font-mono">
+    <body class="p-5 bg-[#FFEDD6] min-h-[calc(100vh-100px)] flex flex-col justify-between font-mono relative">
         <x-header />
         {{ $slot }}
         <x-footer />
+        <x-toast />
+        <script src="{{ Vite::asset('resources/js/app.js') }}"></script>
     </body>
 </html>

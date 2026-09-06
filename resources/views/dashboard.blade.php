@@ -2,12 +2,7 @@
     <main class="max-w-5xl mx-auto py-10 min-h-[calc(100vh-160px)] px-4">
        <x-navbar />
        
-        
-        @session('success')
-            <p class="bg-green-100 border border-green-500 px-2 block mt-4">
-                {{ session('success') }}
-            </p>
-        @endsession
+      
         <p class="pt-6">
             <h2 class="text-lg mt-8 mb-4">
                 {{ date('d/m/Y') }}

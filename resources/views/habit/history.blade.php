@@ -3,7 +3,7 @@
 
     {{-- NAVBAR --}}
     <x-navbar />
-{{--
+{{-- 
     <x-title>
       Histórico
     </x-title> --}}
