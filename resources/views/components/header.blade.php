@@ -8,7 +8,7 @@
                 Habit Tracker
             </p>
         </div>
-        <div>
+        <div class="flex gap-2 items-center">
             
             @auth
             <a href="{{ route('auth.logout') }}" class="bg-white habit-shadow-lg habit-btn p-2 border-2 inline">
@@ -26,6 +26,9 @@
                 </a>   
             </div>
             @endguest
+            <a href="#" class="habit-btn habit-shadow-lg bg-habit-orange p-1">
+                <x-icons.github />
+            </a>
         </div>
     </div>
 </header>
